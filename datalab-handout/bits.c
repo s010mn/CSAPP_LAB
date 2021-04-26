@@ -165,7 +165,7 @@ int tmin(void) {
  *   Rating: 1
  */
 int isTmax(int x) {
-  int i,s,ni;
+  int i,ni;
   i = x + 1;
   ni = ~i + 1;
   return (!(ni^i))&(!(!i));
@@ -222,7 +222,13 @@ int isAsciiDigit(int x) {
  *   Rating: 3
  */
 int conditional(int x, int y, int z) {
-  return 2;
+  int t = !x;
+  t = t + (t<<1);
+  t = t + (t<<2);
+  t = t + (t<<4);
+  t = t + (t<<8);
+  t = t + (t<<16);
+  return (y&(~t))|(z&t);
 }
 /* 
  * isLessOrEqual - if x <= y  then return 1, else return 0 
