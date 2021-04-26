@@ -280,7 +280,20 @@ int logicalNeg(int x) {
  *  Rating: 4
  */
 int howManyBits(int x) {
-  return 0;
+  int s,b16,b8,b4,b2,b1;
+  s = x>>31;
+  x = (s&~x)|(~s&x);
+  b16 = !!(x>>16)<<4;
+  x = x >> b16;
+  b8 = !!(x>>8)<<3;
+  x = x >> b8;
+  b4 = !!(x>>4)<<2;
+  x = x >> b4;
+  b2 = !!(x>>2)<<1;
+  x = x >> b2;
+  b1 = !!(x<<1);
+  x = x >> b1;
+  return b16 + b8 + b4 + b2 + b1 + x + 1;
 }
 //float
 /* 
